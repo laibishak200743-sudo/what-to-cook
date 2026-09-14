@@ -16,8 +16,10 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Install Dependencies & Capacitor CLI
+        run: |
+          npm install
+          npm install @capacitor/cli @capacitor/core @capacitor/android
 
       - name: Build Web App
         run: npm run build
@@ -28,7 +30,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Prepare Android and Build
+      - name: Initialize Android & Build APK
         run: |
           npx cap init "What To Cook" "com.whattocook.app" --web-dir dist --yes || true
           npx cap add android || true
